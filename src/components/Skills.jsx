@@ -7,6 +7,7 @@ const skills = [
   { name: "JavaScript", value: 75 },
   { name: "Tailwind CSS", value: 80 },
   { name: "MySQL", value: 70 },
+  { name: "Git & GitHub", value: 65 }
 ];
 
 const radius = 50;
