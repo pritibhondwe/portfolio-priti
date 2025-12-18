@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
-/* ================= SKILLS DATA ================= */
+
 const skills = [
   { name: "Java", value: 85 },
   { name: "Spring Boot", value: 80 },
@@ -16,12 +16,12 @@ const skills = [
 const radius = 50;
 const circumference = 2 * Math.PI * radius;
 
-/* ================= MAIN COMPONENT ================= */
+
 export default function Skills() {
   return (
     <section id="skills" className="py-24 bg-slate-900/60">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Heading */}
+        {}
         <div className="text-center mb-14">
           <h2 className="text-3xl font-bold mb-3">Skills & Expertise</h2>
           <p className="text-gray-400">
@@ -29,7 +29,7 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Grid */}
+        {}
         <div className="grid grid-cols-2 sm:grid-cols-4 grid-rows-2 gap-10 place-items-center">
           {skills.map((skill, index) => (
             <TiltSkill
@@ -44,7 +44,7 @@ export default function Skills() {
   );
 }
 
-/* ================= SKILL CARD ================= */
+
 function TiltSkill({ skill, isBottom }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -81,10 +81,10 @@ function TiltSkill({ skill, isBottom }) {
         ${isBottom ? "mt-6" : "mb-6"}
       `}
     >
-      {/* Glow */}
+      {}
       <div className="absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition duration-500 bg-gradient-to-r from-cyan-400 to-purple-500" />
 
-      {/* Circle */}
+      {}
       <div
         className="relative w-28 h-28"
         style={{ transform: "translateZ(40px)" }}
@@ -127,7 +127,7 @@ function TiltSkill({ skill, isBottom }) {
         </div>
       </div>
 
-      {/* Skill Name */}
+      {}
       <span
         className="text-sm text-gray-300 group-hover:text-white transition"
         style={{ transform: "translateZ(25px)" }}
