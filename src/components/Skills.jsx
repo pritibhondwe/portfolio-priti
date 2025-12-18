@@ -1,32 +1,42 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
+/* ================= SKILLS DATA ================= */
 const skills = [
   { name: "Java", value: 85 },
   { name: "Spring Boot", value: 80 },
   { name: "React", value: 75 },
   { name: "JavaScript", value: 75 },
+
   { name: "Tailwind CSS", value: 80 },
   { name: "MySQL", value: 70 },
-  { name: "Git & GitHub", value: 65 }
+  { name: "Git & GitHub", value: 65 },
+  { name: "REST APIs", value: 70 }
 ];
 
 const radius = 50;
 const circumference = 2 * Math.PI * radius;
 
+/* ================= MAIN COMPONENT ================= */
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 bg-slate-900/60">
+    <section id="skills" className="py-24 bg-slate-900/60">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        {/* Heading */}
+        <div className="text-center mb-14">
           <h2 className="text-3xl font-bold mb-3">Skills & Expertise</h2>
           <p className="text-gray-400">
             Interactive 3D skill visualization
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-14 place-items-center">
-          {skills.map((skill) => (
-            <TiltSkill key={skill.name} skill={skill} />
+        {/* Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 grid-rows-2 gap-10 place-items-center">
+          {skills.map((skill, index) => (
+            <TiltSkill
+              key={skill.name}
+              skill={skill}
+              isBottom={index >= 4}
+            />
           ))}
         </div>
       </div>
@@ -34,14 +44,13 @@ export default function Skills() {
   );
 }
 
-
-
-function TiltSkill({ skill }) {
+/* ================= SKILL CARD ================= */
+function TiltSkill({ skill, isBottom }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useTransform(y, [-50, 50], [15, -15]);
-  const rotateY = useTransform(x, [-50, 50], [-15, 15]);
+  const rotateX = useTransform(y, [-50, 50], [12, -12]);
+  const rotateY = useTransform(x, [-50, 50], [-12, 12]);
 
   const offset =
     circumference - (skill.value / 100) * circumference;
@@ -66,14 +75,16 @@ function TiltSkill({ skill }) {
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      whileHover={{ scale: 1.1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      className="group relative flex flex-col items-center gap-4"
+      whileHover={{ scale: 1.08 }}
+      transition={{ type: "spring", stiffness: 180, damping: 14 }}
+      className={`group relative flex flex-col items-center gap-3
+        ${isBottom ? "mt-6" : "mb-6"}
+      `}
     >
-      {}
-      <div className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition duration-500 bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse" />
+      {/* Glow */}
+      <div className="absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition duration-500 bg-gradient-to-r from-cyan-400 to-purple-500" />
 
-      {}
+      {/* Circle */}
       <div
         className="relative w-28 h-28"
         style={{ transform: "translateZ(40px)" }}
@@ -101,7 +112,7 @@ function TiltSkill({ skill }) {
             strokeDasharray={circumference}
             strokeDashoffset={circumference}
             whileInView={{ strokeDashoffset: offset }}
-            transition={{ duration: 1.4, ease: "easeOut" }}
+            transition={{ duration: 1.3, ease: "easeOut" }}
           />
           <defs>
             <linearGradient id="gradient">
@@ -111,11 +122,12 @@ function TiltSkill({ skill }) {
           </defs>
         </svg>
 
-        <div className="absolute inset-0 flex items-center justify-center text-lg font-semibold">
+        <div className="absolute inset-0 flex items-center justify-center text-base font-semibold">
           {skill.value}%
         </div>
       </div>
 
+      {/* Skill Name */}
       <span
         className="text-sm text-gray-300 group-hover:text-white transition"
         style={{ transform: "translateZ(25px)" }}
